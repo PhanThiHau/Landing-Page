@@ -2176,10 +2176,10 @@ button, input, select, textarea {
   }
   .side-floating-widgets {
     display: flex;
-    top: auto;
-    bottom: 92px;
-    right: 16px;
-    transform: none;
+    top: 50%;
+    bottom: auto;
+    right: 10px;
+    transform: translateY(-50%);
     z-index: 9998;
   }
   .side-badge-oto {
