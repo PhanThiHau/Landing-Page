@@ -894,13 +894,16 @@ button, input, select, textarea {
 
 @keyframes pulse-ring-zalo {
   0% {
-    box-shadow: 0 0 0 0 rgba(0, 104, 255, 0.7);
+    box-shadow: 0 0 0 0 rgba(0, 104, 255, 0.45), 0 6px 18px rgba(0, 104, 255, 0.35);
+    transform: scale(1);
   }
   70% {
-    box-shadow: 0 0 0 14px rgba(0, 104, 255, 0);
+    box-shadow: 0 0 0 15px rgba(0, 104, 255, 0), 0 6px 18px rgba(0, 104, 255, 0.35);
+    transform: scale(1.06);
   }
   100% {
-    box-shadow: 0 0 0 0 rgba(0, 104, 255, 0);
+    box-shadow: 0 0 0 0 rgba(0, 104, 255, 0), 0 6px 18px rgba(0, 104, 255, 0.35);
+    transform: scale(1);
   }
 }
 
@@ -2172,7 +2175,20 @@ button, input, select, textarea {
     gap: 8px;
   }
   .side-floating-widgets {
+    display: flex;
+    top: auto;
+    bottom: 92px;
+    right: 16px;
+    transform: none;
+    z-index: 9998;
+  }
+  .side-badge-oto {
     display: none;
+  }
+  .side-circle-btn {
+    width: 54px;
+    height: 54px;
+    font-size: 1.5rem;
   }
   .calc-form-fields {
     grid-template-columns: 1fr;
@@ -2340,16 +2356,37 @@ button, input, select, textarea {
 
 .sticky-zalo-btn {
   flex: 1;
-  background: #0068FF;
+  background: linear-gradient(135deg, #0084FF 0%, #0062E3 100%);
   color: #FFFFFF;
-  padding: 11px 10px;
-  border-radius: 8px;
-  font-size: 0.825rem;
-  font-weight: 700;
+  padding: 14px 16px;
+  border-radius: 12px;
+  font-size: 1.02rem;
+  font-weight: 800;
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 6px;
+  gap: 10px;
+  border: 1.5px solid rgba(255, 255, 255, 0.45);
+  box-shadow: 0 6px 20px rgba(0, 104, 255, 0.45);
+  animation: sticky-zalo-bounce 1.8s ease-in-out infinite;
+}
+
+.sticky-zalo-btn i {
+  font-size: 1.3rem;
+}
+
+@keyframes sticky-zalo-bounce {
+  0%, 100% {
+    transform: translateY(0) scale(1);
+    box-shadow: 0 6px 18px rgba(0, 104, 255, 0.45);
+  }
+  40% {
+    transform: translateY(-5px) scale(1.015);
+    box-shadow: 0 12px 26px rgba(0, 104, 255, 0.65);
+  }
+  65% {
+    transform: translateY(-1px) scale(1.005);
+  }
 }
 
 /* ===================================================================
@@ -2559,15 +2596,128 @@ button, input, select, textarea {
   }
 }
 
+/* Dynamic Phone / Zalo Number Animations */
+.inline-zalo-num {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  background: #EFF6FF;
+  color: #0068FF;
+  font-weight: 800;
+  padding: 2px 10px;
+  border-radius: var(--radius-full);
+  border: 1px solid #BFDBFE;
+  white-space: nowrap;
+  animation: zalo-pill-pulse 2s ease-in-out infinite;
+}
+
+.footer-zalo-num {
+  display: inline-block;
+  color: var(--secondary);
+  font-size: 1.35rem;
+  font-weight: 900;
+  letter-spacing: 0.5px;
+  animation: footer-num-glow 2s ease-in-out infinite;
+}
+
+.btn-banner-call {
+  animation: zalo-pill-pulse 2.2s ease-in-out infinite;
+}
+
+.btn-dangky-ngay {
+  animation: sticky-zalo-bounce 2.2s ease-in-out infinite;
+}
+
+.btn-box-zalo {
+  animation: sticky-zalo-bounce 2.2s ease-in-out infinite;
+}
+
+.btn-box-zalo .btn-box-icon {
+  animation: pulse-ring-zalo 2s infinite;
+}
+
+.btn-nationwide-zalo {
+  animation: zalo-pill-pulse 2s ease-in-out infinite;
+}
+
+@keyframes zalo-pill-pulse {
+  0%, 100% {
+    transform: scale(1);
+    box-shadow: 0 3px 10px rgba(0, 104, 255, 0.22);
+  }
+  50% {
+    transform: scale(1.03);
+    box-shadow: 0 6px 18px rgba(0, 104, 255, 0.42);
+  }
+}
+
+@keyframes footer-num-glow {
+  0%, 100% {
+    transform: scale(1);
+    text-shadow: 0 0 0 rgba(255, 199, 32, 0);
+  }
+  50% {
+    transform: scale(1.05);
+    text-shadow: 0 0 12px rgba(255, 199, 32, 0.55);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .btn-banner-call,
+  .btn-dangky-ngay,
+  .btn-box-zalo,
+  .btn-box-zalo .btn-box-icon,
+  .btn-nationwide-zalo,
+  .inline-zalo-num,
+  .footer-zalo-num,
+  .btn-hotline-nav,
+  .hotline-icon-pulse,
+  .sticky-zalo-btn,
+  .btn-side-zalo {
+    animation: none;
+  }
+}
+
 @media (max-width: 768px) {
   .btn-hotline-nav {
+    display: flex;
+    padding: 5px 11px;
+    gap: 7px;
+    animation: zalo-pill-pulse 2.2s ease-in-out infinite;
+  }
+  .hotline-icon-pulse {
+    width: 26px;
+    height: 26px;
+    font-size: 0.75rem;
+  }
+  .hotline-sub {
     display: none;
+  }
+  .hotline-num {
+    font-size: 0.85rem;
+    white-space: nowrap;
   }
   .mobile-sticky-bar {
     display: flex;
   }
   body {
-    padding-bottom: 64px;
+    padding-bottom: 78px;
+  }
+  .hero-tima-banner {
+    padding: 16px 0 52px;
+  }
+  .hero-banner-grid {
+    gap: 16px;
+  }
+  .hero-banner-left {
+    padding-bottom: 0;
+  }
+  .banner-desc-bubble {
+    padding: 12px 16px;
+    font-size: 0.9rem;
+  }
+  .hero-car-img {
+    max-height: 195px;
   }
   .calc-card-main {
     padding: 16px 12px;
@@ -2615,13 +2765,43 @@ button, input, select, textarea {
   .container {
     padding: 0 14px;
   }
+  .brand-logo-tima {
+    margin-right: 4px;
+  }
+  .tima-text {
+    font-size: 1.32rem;
+  }
+  .tima-wing-svg {
+    width: 20px;
+    height: 17px;
+    margin-left: 4px;
+  }
+  .tima-sub {
+    font-size: 0.62rem;
+  }
+  .nav-right-actions {
+    gap: 8px;
+    margin-left: 4px;
+  }
+  .btn-hotline-nav {
+    padding: 4px 10px;
+    gap: 6px;
+  }
+  .hotline-icon-pulse {
+    width: 22px;
+    height: 22px;
+    font-size: 0.7rem;
+  }
+  .hotline-num {
+    font-size: 0.8rem;
+  }
   .hero-support-pill {
     font-size: 0.74rem;
     padding: 6px 12px;
     line-height: 1.35;
   }
   .title-3d-vaytien {
-    font-size: 2.2rem;
+    font-size: 2.15rem;
   }
   .sticker-khongthechap {
     font-size: 1.15rem;
@@ -2642,12 +2822,15 @@ button, input, select, textarea {
     padding: 8px 16px;
   }
   .mobile-sticky-bar {
-    padding: 8px 10px;
+    padding: 10px 12px;
     gap: 8px;
   }
-  .sticky-call-btn,
-  .sticky-zalo-btn {
-    font-size: 0.78rem;
+  .sticky-call-btn {
+    font-size: 0.8rem;
     padding: 10px 8px;
+  }
+  .sticky-zalo-btn {
+    font-size: 0.95rem;
+    padding: 13px 12px;
   }
 }
