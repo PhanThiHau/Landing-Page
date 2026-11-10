@@ -405,14 +405,33 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  if (mobileToggle) {
-    mobileToggle.addEventListener('click', () => {
+  if (mobileToggle && navMenu) {
+    const closeMobileMenu = () => {
+      navMenu.classList.remove('open');
+      const icon = mobileToggle.querySelector('i');
+      if (icon) icon.className = 'fas fa-bars';
+    };
+
+    mobileToggle.addEventListener('click', (e) => {
+      e.stopPropagation();
       navMenu.classList.toggle('open');
       const icon = mobileToggle.querySelector('i');
-      if (navMenu.classList.contains('open')) {
-        icon.className = 'fas fa-times';
-      } else {
-        icon.className = 'fas fa-bars';
+      if (icon) {
+        icon.className = navMenu.classList.contains('open') ? 'fas fa-times' : 'fas fa-bars';
+      }
+    });
+
+    navMenu.querySelectorAll('.nav-link').forEach(link => {
+      link.addEventListener('click', () => {
+        if (window.innerWidth <= 992) {
+          closeMobileMenu();
+        }
+      });
+    });
+
+    document.addEventListener('click', (e) => {
+      if (navMenu.classList.contains('open') && !navMenu.contains(e.target) && !mobileToggle.contains(e.target)) {
+        closeMobileMenu();
       }
     });
   }
